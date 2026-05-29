@@ -11,7 +11,7 @@ public class UserToBaeminData implements Serializable {
 	private byte[] digitalSignature; // 이중서명
 	private DigitalEnvelope cardEnvelope; // 카드사용 전자봉투
 	
-	public UserToBaeminData (OrderInfo orderInfo, byte[] orderInfoHash, byte[] paymentInfoHash, byte[] combineHash,
+	public UserToBaeminData (OrderInfo orderInfo, byte[] orderInfoHash, byte[] paymentInfoHash,
 			byte[] digitalSignature, DigitalEnvelope cardEnvelope) {
 		this.orderInfo = orderInfo;
 		this.orderInfoHash = orderInfoHash;
