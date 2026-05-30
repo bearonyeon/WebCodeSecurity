@@ -31,8 +31,8 @@ public class User {
 		this.privateKey = privateKey;
 	}
 	
-	// 사용자가 배달의 민족으로 보낼 데이터 생성
-	public UserToBaeminData createData(OrderInfo orderInfo, PaymentInfo paymentInfo, PublicKey cardPublicKey) 
+	// 사용자가 배달의 민족으로 보낼 전자봉투 생성
+	public DigitalEnvelope createEnvelope(OrderInfo orderInfo, PaymentInfo paymentInfo, PublicKey cardPublicKey, PublicKey baeminPublicKey) 
 			throws NoSuchAlgorithmException, InvalidKeyException, SignatureException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, IOException {
 		// 주문 정보 해시 생성
 		byte[] orderInfoBytes = objectToBytes(orderInfo);
@@ -57,10 +57,14 @@ public class User {
 		
 		// 카드사용 전자봉투 생성
 		DigitalEnvelope cardEnvelope = EnvelopeUtil.sealEnvelope(cardDataBytes, cardPublicKey);
-		
+		 
 		// 배달의 민족 전달 데이터 생성
-		UserToBaeminData data = new UserToBaeminData(orderInfo, orderInfoHash, paymentInfoHash, digitalSignature, cardEnvelope);
-		return data;
+		UserToBaeminData baeminData = new UserToBaeminData(orderInfo, orderInfoHash, paymentInfoHash, digitalSignature, cardEnvelope);
+		byte[] baeminDataBytes = objectToBytes(baeminData);
+		
+		// 2차 전자봉투 생성
+		DigitalEnvelope baeminEnvelope = EnvelopeUtil.sealEnvelope(baeminDataBytes, baeminPublicKey);
+		return baeminEnvelope;
 	}
 	
 	// 객체 직렬화
