@@ -26,6 +26,11 @@ public class KeyGenerate {
 		RSAUtil.savePublicKey("card_public.key", cardKeyPair.getPublic());
 		RSAUtil.savePrivateKey("card_private.key", cardKeyPair.getPrivate());
 		
+		// 가맹점 키 생성
+		KeyPair storeKeyPair = RSAUtil.generateKeyPair();
+		RSAUtil.savePublicKey("store_public.key", storeKeyPair.getPublic());
+		RSAUtil.savePrivateKey("store_private.key", storeKeyPair.getPrivate());
+		
 		System.out.println("키 생성 완료");
 
 	}

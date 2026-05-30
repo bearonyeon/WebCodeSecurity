@@ -8,7 +8,6 @@ public class BaeminToCardData implements Serializable {
 	private DigitalEnvelope cardEnvelope; // 카드사용 전자봉투
 	
 	public BaeminToCardData(DigitalEnvelope cardEnvelope) {
-		super();
 		this.cardEnvelope = cardEnvelope;
 	}
 

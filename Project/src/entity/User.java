@@ -23,11 +23,9 @@ import model.PaymentInfo;
 import model.UserToBaeminData;
 
 public class User {
-	private PublicKey publicKey;
 	private PrivateKey privateKey;
 	
-	public User(PublicKey publicKey, PrivateKey privateKey) {
-		this.publicKey = publicKey;
+	public User(PrivateKey privateKey) {
 		this.privateKey = privateKey;
 	}
 	

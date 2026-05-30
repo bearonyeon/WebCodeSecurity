@@ -30,12 +30,21 @@ public class CardCompany {
 		this.privateKey = privateKey;
 	}
 	
-	// 배달의 민족에서 보낸 전자봉투 개봉
+	// 배달의 민족에서 보낸 2차 전자봉투 개봉
 	public BaeminToCardData openEnvelope(DigitalEnvelope cardEnvelope) 
 			throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, ClassNotFoundException, IOException {
 		byte[] decrypted = EnvelopeUtil.openEnvelope(cardEnvelope, privateKey);
 		BaeminToCardData cardData = (BaeminToCardData) bytesToObject(decrypted);
 		return cardData;
+	}
+	
+	// 1차 전자봉투 개봉
+	public CardData openCardEnvelope(BaeminToCardData cardData) 
+			throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, ClassNotFoundException, IOException {
+		DigitalEnvelope cardEnvelope = cardData.getCardEnvelope();
+		byte[] decrypted = EnvelopeUtil.openEnvelope(cardEnvelope, privateKey);
+		CardData data = (CardData) bytesToObject(decrypted);
+		return data;
 	}
 	
 	// 결제 정보 검증

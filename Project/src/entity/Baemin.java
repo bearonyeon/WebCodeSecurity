@@ -55,6 +55,7 @@ public class Baemin {
 		return cardData;
 	}
 	
+	// 카드사 전달 전자봉투 생성
 	public DigitalEnvelope createCardEnvelope(BaeminToCardData cardData, PublicKey cardPublicKey) 
 			throws IOException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
 		byte[] cardDataBytes = objectToBytes(cardData);
